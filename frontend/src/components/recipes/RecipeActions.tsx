@@ -3,6 +3,7 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Category } from '@/types/recipe';
 import { useEffect, useState } from 'react';
+import { ClientOnly } from '@/components/client-only';
 
 interface RecipeActionsProps {
   categories: Category[];
@@ -19,7 +20,7 @@ const RecipeActions = ({
 
   useEffect(() => {
     // Check if the share API is available on the client side
-    setCanShare(typeof navigator !== 'undefined' && !!navigator.share);
+    setCanShare(!!navigator.share);
   }, []);
 
   const handlePrint = () => {
@@ -42,16 +43,20 @@ const RecipeActions = ({
 
   return (
     <div className="flex flex-wrap items-center gap-4 mb-8 print:hidden">
-      <Button variant="outline" size="sm" onClick={handlePrint}>
-        <Printer className="h-4 w-4 mr-2" />
-        Print Recipe
-      </Button>
-      {canShare && (
-        <Button variant="outline" size="sm" onClick={handleShare}>
-          <Share2 className="h-4 w-4 mr-2" />
-          Share
+      <ClientOnly>
+        <Button variant="outline" size="sm" onClick={handlePrint}>
+          <Printer className="h-4 w-4 mr-2" />
+          Print Recipe
         </Button>
-      )}
+        
+        {canShare && (
+          <Button variant="outline" size="sm" onClick={handleShare}>
+            <Share2 className="h-4 w-4 mr-2" />
+            Share
+          </Button>
+        )}
+      </ClientOnly>
+      
       <div className="ml-auto flex gap-2">
         {categories.map((category) => (
           <Badge key={category.id} variant="secondary">

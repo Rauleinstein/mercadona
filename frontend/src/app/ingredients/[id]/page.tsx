@@ -9,7 +9,6 @@ import { Metadata } from 'next';
 import { ArrowLeft, AlertCircle } from 'lucide-react';
 import { Ingredient } from '@/types/ingredient';
 
-
 export default function IngredientPage({ params }: { params: { id: string } }) {
   const router = useRouter();
   const [ingredient, setIngredient] = useState<Ingredient | null>(null);

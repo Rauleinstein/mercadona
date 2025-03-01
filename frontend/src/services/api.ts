@@ -6,13 +6,15 @@ const isServer = typeof window === 'undefined';
 
 // Function to get the base URL depending on the environment
 function getBaseUrl(): string {
+  // Use NEXT_PUBLIC_API_URL if available
   if (process.env.NEXT_PUBLIC_API_URL) {
     return process.env.NEXT_PUBLIC_API_URL;
   }
-  // For client-side requests, use localhost
+  // Default to localhost
   return 'http://localhost:8000/api';
 }
 
+// Initialize API_BASE_URL once
 const API_BASE_URL = getBaseUrl();
 
 class ApiError extends Error {
