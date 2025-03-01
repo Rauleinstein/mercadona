@@ -1,0 +1,59 @@
+# IDE and Editor files
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Frontend
+frontend/node_modules/
+frontend/.next/
+frontend/out/
+frontend/.env
+frontend/.env.local
+frontend/.env.*.local
+frontend/npm-debug.log*
+frontend/yarn-debug.log*
+frontend/yarn-error.log*
+frontend/.pnpm-debug.log*
+frontend/coverage/
+frontend/.vercel
+frontend/build/
+
+# Backend
+backend/vendor/
+backend/var/
+backend/public/bundles/
+backend/.env
+backend/.env.local
+backend/.env.*.local
+backend/config/jwt/*.pem
+backend/phpunit.xml
+backend/.phpunit.result.cache
+backend/composer.phar
+backend/public/uploads/
+
+# Docker
+.docker/
+docker-compose.override.yml
+
+# Database
+*.sql
+*.sqlite
+*.sqlite3
+
+# Logs
+logs/
+*.log
+
+# Cache
+*.cache
+.phpunit.result.cache
+
+# Temporary files
+tmp/
+temp/

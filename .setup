@@ -1,0 +1,93 @@
+Recipe App Prompt
+Core Features
+Recipe Management
+
+Create, edit, and delete recipes with:
+
+Recipe name and description
+Cooking time and difficulty level
+Step-by-step cooking instructions
+Number of servings
+Categories and tags for easy filtering
+Photos of the finished dish
+
+
+
+Ingredient Management
+
+Ingredient database with:
+
+Name and description
+Photos of each ingredient
+Price tracking from different supermarkets
+Weight/quantity units
+Nutritional information
+Alternative ingredient suggestions
+
+
+
+Shopping Experience
+
+Add ingredients directly to shopping list from recipes
+Automatically calculate total quantities needed when multiple recipes use the same ingredient
+Compare prices across different supermarkets
+Sort shopping list by supermarket sections (produce, meat, dairy, etc.)
+Mark items as purchased
+Save favorite or frequently bought items
+
+Social Features
+
+Share recipes with other users
+Follow other users and save their recipes
+Rate and comment on recipes
+Create public or private recipe collections
+Share shopping lists with family members
+Export recipes in different formats
+
+User Experience
+
+Search recipes by:
+
+Available ingredients
+Cooking time
+Difficulty level
+Dietary restrictions
+Cost range
+
+
+Filter recipes by:
+
+Most popular
+Recently added
+Seasonal ingredients
+User ratings
+
+
+
+Smart Features
+
+Scale recipe portions automatically
+Calculate total recipe cost based on ingredient prices
+Generate weekly meal plans
+Suggest recipes based on:
+
+Available ingredients
+User preferences
+Previous cooking history
+Seasonal ingredients
+
+
+
+Additional Features
+
+Create multiple shopping lists
+Set dietary preferences and restrictions
+Track pantry inventory
+Get notifications for:
+
+Price drops on favorite ingredients
+New recipes from followed users
+Shopping list reminders
+
+
+Print recipe cards and shopping lists
