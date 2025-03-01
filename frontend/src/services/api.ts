@@ -1,4 +1,5 @@
 import { Recipe, RecipeFilters, ApiResponse } from '@/types/recipe';
+import { Ingredient, IngredientFilters } from '@/types/ingredient';
 
 // Helper function to determine if we're on the server side
 const isServer = typeof window === 'undefined';
@@ -8,12 +9,6 @@ function getBaseUrl(): string {
   if (process.env.NEXT_PUBLIC_API_URL) {
     return process.env.NEXT_PUBLIC_API_URL;
   }
-  
-  // For server-side requests, use the internal Docker network
-  if (isServer) {
-    return 'http://backend:8000/api';
-  }
-  
   // For client-side requests, use localhost
   return 'http://localhost:8000/api';
 }
@@ -69,49 +64,18 @@ export async function fetchRecipes(filters?: RecipeFilters): Promise<ApiResponse
 }
 
 export async function fetchRecipeById(id: number): Promise<ApiResponse<Recipe>> {
-  try {
-    const url = `${API_BASE_URL}/recipes/${id}`;
-    
-    const response = await fetch(url, {
-      method: 'GET',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
-      },
-      next: {
-        revalidate: 60,
-      },
-    });
-    
-    if (!response.ok) {
-      console.error("[API] Error response:", response.status, response.statusText);
-      const errorData = await response.json().catch(() => ({ message: 'Failed to parse error response' }));
-      console.error("[API] Error data:", errorData);
-      throw new ApiError(response.status, errorData.message || `HTTP error! status: ${response.status}`);
-    }
-    
-    const data = await response.json();
-    return data;
-  } catch (error: unknown) {
-    
-    if (error instanceof Error) {
-      console.error("[API] Error details:", {
-        message: error.message,
-        name: error.name,
-        stack: error.stack
-      });
-    }
-    
-    if (error instanceof TypeError && error.message === 'Failed to fetch') {
-      throw new ApiError(503, 'Unable to connect to the API server. Please ensure the backend server is running.');
-    }
-    
-    if (error instanceof ApiError) {
-      throw error;
-    }
-    
-    throw new ApiError(500, error instanceof Error ? error.message : 'Failed to fetch recipe');
-  }
+  const url = `${API_BASE_URL}/recipes/${id}`;
+
+  const response = await fetch(url, {
+    headers: {
+      'Accept': 'application/json',
+    },
+    next: {
+      revalidate: 5, // Cache for 60 seconds
+    },
+  });
+
+  return handleResponse<ApiResponse<Recipe>>(response);
 }
 
 export async function createRecipe(recipe: Omit<Recipe, 'id'>): Promise<ApiResponse<Recipe>> {
@@ -167,5 +131,45 @@ export async function deleteRecipe(id: number): Promise<ApiResponse<void>> {
     }
     throw new ApiError(500, 'Failed to delete recipe');
   }
+}
+
+export async function fetchIngredients(filters?: IngredientFilters): Promise<ApiResponse<Ingredient[]>> {
+
+  const url = `${API_BASE_URL}/ingredients`;
+
+  console.log('Fetching ingredients from:', url);
+  
+  try {
+    const response = await fetch(url, {
+      headers: {
+        'Accept': 'application/json',
+      },
+      next: {
+        revalidate: 60, // Cache for 60 seconds
+      },
+    });
+    return handleResponse<ApiResponse<Ingredient[]>>(response);
+  } catch (error) {
+    if (error instanceof ApiError) {
+      throw error;
+    }
+    throw new ApiError(500, 'Failed to fetch ingredients');
+  }
+}
+
+export async function fetchIngredientById(id: number): Promise<ApiResponse<Ingredient>> {
+  const url = `${API_BASE_URL}/ingredients/${id}`;
+  console.log('Fetching ingredient from:', url);
+
+  const response = await fetch(url, {
+    headers: {
+      'Accept': 'application/json',
+    },
+    next: {
+      revalidate: 60, // Cache for 60 seconds
+    },
+  });
+
+  return handleResponse<ApiResponse<Ingredient>>(response);
 } 
  

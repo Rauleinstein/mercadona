@@ -1,6 +1,128 @@
-# Recipe App
+# 🥘 Mercadona Recipe Manager
 
-A modern recipe management application built with Symfony 6.4 + EasyAdmin 3 backend and Next.js 14 + Shadcn UI + Tailwind CSS frontend.
+A modern, full-stack recipe management and grocery shopping application built with Next.js and Symfony.
+
+## 🌟 Overview
+
+Mercadona Recipe Manager is a comprehensive platform that revolutionizes how users manage recipes, plan meals, and handle grocery shopping. The application combines recipe management with smart shopping features and social interactions, creating a seamless cooking and shopping experience.
+
+## ✨ Core Features
+
+### 📖 Recipe Management
+- **Recipe Creation & Editing**
+  - Detailed recipe information (name, description, cooking time, difficulty)
+  - Step-by-step cooking instructions with rich text formatting
+  - Serving size customization
+  - Multi-category and tag system
+  - High-quality photo management
+  - Nutritional information calculation
+
+### 🥕 Ingredient System
+- **Smart Ingredient Database**
+  - Comprehensive ingredient profiles
+  - Real-time price tracking across supermarkets
+  - Standardized measurement units
+  - Detailed nutritional information
+  - Smart alternative ingredient suggestions
+  - Seasonal ingredient indicators
+
+### 🛒 Shopping Experience
+- **Intelligent Shopping Lists**
+  - One-click ingredient to shopping list conversion
+  - Automatic quantity aggregation
+  - Real-time price comparison
+  - Smart store section organization
+  - Purchase tracking
+  - Favorite items management
+  - Multi-list support
+
+### 👥 Social Features
+- **Community Engagement**
+  - Recipe sharing and discovery
+  - User following system
+  - Rating and review system
+  - Public/private recipe collections
+  - Collaborative shopping lists
+  - Recipe export in multiple formats
+
+### 🔍 Smart Search & Filtering
+- **Advanced Search Capabilities**
+  - Ingredient-based search
+  - Time and difficulty filters
+  - Dietary restriction filtering
+  - Budget-based search
+  - Smart recipe recommendations
+
+### 🧠 AI-Powered Features
+- **Intelligent Assistance**
+  - Automatic portion scaling
+  - Dynamic cost calculation
+  - Smart meal planning
+  - Personalized recipe recommendations
+  - Inventory management suggestions
+
+### 📱 User Experience
+- **Modern Interface**
+  - Responsive design
+  - Dark/light mode
+  - Offline support
+  - Cross-device synchronization
+  - Accessibility compliance
+
+## 🛠 Technical Stack
+
+### Frontend
+- Next.js 14+ with App Router
+- TypeScript 5+
+- TailwindCSS for styling
+- React Query for data fetching
+- Zod for validation
+- Jest & React Testing Library
+
+### Backend
+- Symfony 6.3+
+- PHP 8.2+
+- API Platform
+- Doctrine ORM
+- JWT Authentication
+- MySQL/PostgreSQL
+
+### Infrastructure
+- Docker containerization
+- Redis caching
+- Nginx reverse proxy
+- CI/CD with GitHub Actions
+- AWS/Vercel deployment
+
+## 🚀 Getting Started
+
+Detailed installation and setup instructions will be provided in the `.setup` directory.
+
+## 📈 Roadmap
+
+- [ ] Core recipe management system
+- [ ] Ingredient database integration
+- [ ] Shopping list functionality
+- [ ] Social features implementation
+- [ ] AI-powered recommendations
+- [ ] Mobile app development
+- [ ] Integration with major supermarket APIs
+- [ ] Advanced analytics dashboard
+
+## 🤝 Contributing
+
+We welcome contributions! Please see our contributing guidelines for more details.
+
+## 📄 License
+
+This project is licensed under the MIT License - see the LICENSE file for details.
+
+## 🔗 Links
+
+- [Documentation](docs/)
+- [API Reference](api-docs/)
+- [Contributing Guidelines](CONTRIBUTING.md)
+- [Code of Conduct](CODE_OF_CONDUCT.md)
 
 ## Features
 

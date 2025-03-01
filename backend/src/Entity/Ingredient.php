@@ -15,30 +15,31 @@ class Ingredient
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups(['ingredient:read', 'recipe:read'])]
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    #[Groups(['ingredient:read'])]
+    #[Groups(['ingredient:read', 'recipe:read'])]
     private ?string $name = null;
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
-    #[Groups(['ingredient:read'])]
+    #[Groups(['ingredient:read', 'recipe:read'])]
     private ?string $description = null;
 
     #[ORM\Column(length: 255, nullable: true)]
-    #[Groups(['ingredient:read'])]
+    #[Groups(['ingredient:read', 'recipe:read'])]
     private ?string $image = null;
 
     #[ORM\Column(length: 50)]
-    #[Groups(['ingredient:read'])]
+    #[Groups(['ingredient:read', 'recipe:read'])]
     private ?string $unit = null;
 
     #[ORM\Column(type: Types::JSON, nullable: true)]
-    #[Groups(['ingredient:read'])]
+    #[Groups(['ingredient:read', 'recipe:read'])]
     private ?array $nutritionalInfo = null;
 
     #[ORM\Column(type: Types::DECIMAL, precision: 10, scale: 2, nullable: true)]
-    #[Groups(['ingredient:read'])]
+    #[Groups(['ingredient:read', 'recipe:read'])]
     private ?string $basePrice = null;
 
     #[ORM\OneToMany(mappedBy: 'ingredient', targetEntity: RecipeIngredient::class, orphanRemoval: true)]

@@ -24,25 +24,38 @@ RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 RUN docker-php-ext-configure intl
 RUN docker-php-ext-install pdo_pgsql mbstring exif pcntl bcmath gd intl
 
-# Get latest Composer
+# Install Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
+
+# Install Symfony CLI
+RUN curl -1sLf 'https://dl.cloudsmith.io/public/symfony/stable/setup.deb.sh' | bash
+RUN apt-get install symfony-cli
 
 # Set working directory
 WORKDIR /var/www/html
 
-# Copy existing application directory
+# Copy composer files first to leverage Docker cache
+COPY composer.json composer.lock ./
+
+# Install dependencies
+RUN composer install --no-scripts --no-autoloader
+
+# Copy the rest of the application
 COPY . .
 
-# Install dependencies (keep dev dependencies for development environment)
-RUN if [ "$APP_ENV" = "prod" ]; then \
-        composer install --no-interaction --optimize-autoloader --no-dev; \
+COPY .env.local .env
+
+# Generate autoload files and run scripts
+RUN composer dump-autoload --optimize && \
+    if [ "$APP_ENV" = "prod" ]; then \
+        composer install --no-dev --optimize-autoloader --no-scripts; \
     else \
-        composer install --no-interaction --optimize-autoloader; \
+        composer install --optimize-autoloader --no-scripts; \
     fi
 
-# Set permissions
-RUN chown -R www-data:www-data /var/www/html/var
+# Configure PHP
+COPY docker/php/php.ini /usr/local/etc/php/conf.d/app.ini
 
 EXPOSE 9000
 
-CMD ["php-fpm"] 
+CMD ["php-fpm"]

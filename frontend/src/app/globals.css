@@ -2,20 +2,101 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@media (prefers-color-scheme: dark) {
+@layer base {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: 140 25% 98%;
+    --foreground: 0 0% 12%;
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 12%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 12%;
+    
+    /* Primary - Dark Spring Green */
+    --primary: 162 100% 23%;
+    --primary-foreground: 0 0% 100%;
+    
+    /* Secondary - Pistachio */
+    --secondary: 108 45% 66%;
+    --secondary-foreground: 0 0% 12%;
+    
+    /* Muted - Celadon */
+    --muted: 140 25% 76%;
+    --muted-foreground: 0 0% 35%;
+    
+    /* Accent - Vanilla */
+    --accent: 65 50% 78%;
+    --accent-foreground: 0 0% 12%;
+    
+    /* Destructive */
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 100%;
+    
+    /* Border & Input - Soft Celadon */
+    --border: 140 30% 80%;
+    --input: 140 30% 80%;
+    
+    /* Ring - Dark Spring Green */
+    --ring: 162 100% 23%;
+    
+    --radius: 0.5rem;
+    
+    /* Chart Colors */
+    --chart-1: 162 100% 23%;  /* Dark Spring Green */
+    --chart-2: 108 45% 66%;   /* Pistachio */
+    --chart-3: 140 25% 76%;   /* Celadon */
+    --chart-4: 65 50% 78%;    /* Vanilla */
+    --chart-5: 25 35% 51%;    /* Copper */
+  }
+
+  .dark {
+    --background: 162 100% 8%;
+    --foreground: 0 0% 98%;
+    --card: 162 100% 10%;
+    --card-foreground: 0 0% 98%;
+    --popover: 162 100% 10%;
+    --popover-foreground: 0 0% 98%;
+    
+    /* Primary - Lighter Spring Green */
+    --primary: 162 70% 45%;
+    --primary-foreground: 0 0% 100%;
+    
+    /* Secondary - Darker Pistachio */
+    --secondary: 108 35% 45%;
+    --secondary-foreground: 0 0% 100%;
+    
+    /* Muted - Darker Celadon */
+    --muted: 140 20% 30%;
+    --muted-foreground: 140 15% 80%;
+    
+    /* Accent - Darker Vanilla */
+    --accent: 65 30% 55%;
+    --accent-foreground: 0 0% 100%;
+    
+    /* Destructive */
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 100%;
+    
+    /* Border & Input */
+    --border: 162 30% 25%;
+    --input: 162 30% 25%;
+    
+    /* Ring */
+    --ring: 162 70% 45%;
+    
+    /* Chart Colors - Dark Mode */
+    --chart-1: 162 70% 45%;   /* Lighter Spring Green */
+    --chart-2: 108 45% 55%;   /* Lighter Pistachio */
+    --chart-3: 140 25% 65%;   /* Lighter Celadon */
+    --chart-4: 65 40% 70%;    /* Darker Vanilla */
+    --chart-5: 25 45% 65%;    /* Lighter Copper */
   }
 }
 
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
 }

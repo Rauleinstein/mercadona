@@ -1,6 +1,15 @@
 'use client';
 
 import { useState } from 'react';
+import { Search } from 'lucide-react';
+import { Input } from '@/components/ui/input';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
 
 interface SearchAndFiltersProps {
   onSearch: (query: string) => void;
@@ -21,46 +30,57 @@ export default function SearchAndFilters({
     onSearch(query);
   };
 
+  const handleCategoryChange = (value: string) => {
+    // Convert "all" to empty string for the API
+    onCategoryChange(value === "all" ? "" : value);
+  };
+
+  const handleDifficultyChange = (value: string) => {
+    // Convert "all" to empty string for the API
+    onDifficultyChange(value === "all" ? "" : value);
+  };
+
   return (
     <div className="flex flex-col md:flex-row gap-4 mb-8">
       {/* Search Bar */}
-      <div className="flex-1">
+      <div className="flex-1 relative">
         <div className="relative">
-          <input
+          <Input
             type="text"
             value={searchQuery}
             onChange={handleSearch}
             placeholder="Search recipes..."
-            className="w-full px-4 py-3 rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
+            className="pl-10"
           />
-          <span className="absolute right-3 top-3 text-gray-400">
-            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-            </svg>
-          </span>
+          <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
         </div>
       </div>
 
       {/* Filter Buttons */}
       <div className="flex gap-4">
-        <select 
-          onChange={(e) => onCategoryChange(e.target.value)}
-          className="px-4 py-3 rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
-        >
-          <option value="">All Categories</option>
-          <option value="main">Main Course</option>
-          <option value="salad">Salad</option>
-          <option value="dessert">Dessert</option>
-        </select>
-        <select 
-          onChange={(e) => onDifficultyChange(e.target.value)}
-          className="px-4 py-3 rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
-        >
-          <option value="">All Difficulties</option>
-          <option value="easy">Easy</option>
-          <option value="medium">Medium</option>
-          <option value="hard">Hard</option>
-        </select>
+        <Select onValueChange={handleCategoryChange} defaultValue="all">
+          <SelectTrigger className="w-[180px]">
+            <SelectValue placeholder="Category" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="all">All Categories</SelectItem>
+            <SelectItem value="main">Main Course</SelectItem>
+            <SelectItem value="salad">Salad</SelectItem>
+            <SelectItem value="dessert">Dessert</SelectItem>
+          </SelectContent>
+        </Select>
+        
+        <Select onValueChange={handleDifficultyChange} defaultValue="all">
+          <SelectTrigger className="w-[180px]">
+            <SelectValue placeholder="Difficulty" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="all">All Difficulties</SelectItem>
+            <SelectItem value="easy">Easy</SelectItem>
+            <SelectItem value="medium">Medium</SelectItem>
+            <SelectItem value="hard">Hard</SelectItem>
+          </SelectContent>
+        </Select>
       </div>
     </div>
   );
